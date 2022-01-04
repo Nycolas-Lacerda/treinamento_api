@@ -1,0 +1,8 @@
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond $1 !^(index\.php|public|images|robots\.txt|css)
+RewriteRule ^(.*)$ index.php/$1 [L,QSA]
+
+SetEnv CI_ENV development
+SetEnv CI_HOST 'http://localhost/api_websec/'
