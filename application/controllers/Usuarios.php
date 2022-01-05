@@ -10,6 +10,15 @@ class Usuarios extends CI_Controller {
 		$this->load->model('Usuarios_model', 'Model');
 	}
 
+	// METODO CONSTRUTOR
+	public function __construct()
+    {
+        parent::__construct();
+
+        $this->load->model('Usuarios_model', 'Model');
+        // $this->load->model('Clientes_model', 'ClientesModel');
+    }
+
 	/**
 	 * [index Index Page for this controller.]
 	 *
@@ -68,4 +77,6 @@ class Usuarios extends CI_Controller {
 		$httpStatus = $response['status'] ? '200' : '400';
 		echo json_output($httpStatus, $response);
 	}
+	
+	
 }
