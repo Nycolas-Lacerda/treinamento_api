@@ -81,3 +81,10 @@ $route['api/notificacao']['GET']            = 'notificacao/getNotificacao';
 
 // PASS
 $route['pass/(:any)']['GET']    = 'pass/index/$1';
+
+// USUARIOS
+$route['usuarios']['GET']                              = 'usuarios/index';
+$route['usuarios/nome']['GET']                         = 'usuarios/getName';
+$route['usuarios/nome/']['GET']                        = 'usuarios/getName';
+$route['usuarios/nome/(:any)']['GET']                  = 'usuarios/getName/$1';
+$route['usuarios']['POST']                             = 'usuarios/postUser';

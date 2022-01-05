@@ -37,7 +37,8 @@
  */
 
 
-define('APP_BASE_URL', isset($_SERVER['CI_HOST']) ? $_SERVER['CI_HOST'] : 'http://localhost/treinamento_api/');
+define('APP_BASE_URL', 'http://localhost/treinamento_api/');
+// define('APP_BASE_URL', isset($_SERVER['CI_HOST']) ? $_SERVER['CI_HOST'] : 'http://localhost/treinamento_api/');
 
 /*
  *---------------------------------------------------------------
