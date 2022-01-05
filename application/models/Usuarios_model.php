@@ -48,4 +48,94 @@ class Usuarios_model extends CI_Model
             return [];
         }
     }
+
+    /**
+     * Método para inserir
+     */
+    function insert($dados)
+    {
+        if (!isset($dados)) {
+            $response['status']  = false;
+            $response['message'] = "Dados não informados.";
+            $response['tipo'] = "danger";
+        } else {
+            $this->form_validation->set_data($dados);
+            $this->form_validation->set_rules('nome', 'Nome', 'required|min_length[3]|trim');
+            $this->form_validation->set_rules('email', 'Email', 'required|min_length[3]|trim');
+
+            if ($this->form_validation->run() === false) {
+                $response['status']  = false;
+                $response['message'] = validation_errors();
+            } else {
+                $status         = $this->db->insert($this->table, $dados);
+                if ($status) {
+                    $id = $this->db->insert_id();
+                    $response['registro'] = [];
+                    $response['status']   = true;
+                    $response['message']  = "Usuário inserido com sucesso.";
+                    $response['tipo'] = "success";
+                } else {
+                    $response['status']  = false;
+                    $response['message'] = $this->db->error_message();
+                    $response['tipo'] = "danger";
+                }
+            }
+        }
+        return $response;
+    }
+
+    /**
+     * Método para o atualizar
+     */
+    public function update($filtro, $dados)
+    {
+        if (!isset($dados)) {
+            $response['status']  = false;
+            $response['message'] = "Dados não informados.";
+            $response['tipo'] = "danger";
+        } else {
+            $this->db->where($filtro);
+            $status = $this->db->update($this->table, $dados);
+            if ($status) {
+                $response['registro'] = $filtro['id'];
+                $response['status']   = true;
+                $response['message']  = "Usuário atualizado com sucesso.";
+                $response['tipo'] = "success";
+            } else {
+                $response['status']  = false;
+                $response['message'] = $this->db->error_message();
+                $response['tipo'] = "danger";
+            }
+        }
+        return $response;
+    }
+
+    /**
+     * Método para excluir
+     */
+    function delete($field, $value)
+    {
+        if (is_null($field) || is_null($value)) {
+            $response['status']  = false;
+            $response['message'] = "Dados não informados.";
+            $response['tipo'] = "danger";
+        } else {
+            $filtro = [
+                $field => $value
+            ];
+            $this->db->where($filtro);
+            $status = $this->db->delete($this->table);
+
+            if ($status) {
+                $response['status']  = true;
+                $response['message'] = "Usuário removido com sucesso.";
+                $response['tipo'] = "success";
+            } else {
+                $response['status']  = false;
+                $response['message'] = $this->db->error_message();
+                $response['tipo'] = "danger";
+            }
+        }
+        return $response;
+    }
 }

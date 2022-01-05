@@ -18,10 +18,10 @@ class Pass extends CI_Controller
      *
      * @return  [view]              [return página chamada]
      */
-    public function index($id = null)
+     public function index($id = null)
     {
         $dados = [];
-        if ($id) {  
+        if ($id) { 
             $dados['name'] = geraCripto($this->input->post('name'));
         } 
         
